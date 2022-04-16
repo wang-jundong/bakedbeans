@@ -1,5 +1,5 @@
 {
-	"name": "wulfznft",
+	"name": "fruit-party",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -32,7 +32,8 @@
 		"web3": "^1.7.0"
 	},
 	"scripts": {
-		"start": "react-app-rewired start",
+		"pm2": "pm2 start --name fruit-party npm -- start ",
+		"start": "PORT=3001 react-app-rewired start",
 		"build": "react-app-rewired build",
 		"test": "react-app-rewired test",
 		"eject": "react-scripts eject"
