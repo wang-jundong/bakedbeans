@@ -1,12 +1,12 @@
+import { Web3ReactProvider } from "@web3-react/core";
 import React from "react";
 import ReactDOM from "react-dom";
+import "react-notifications-component/dist/theme.css";
+import { Provider } from "react-redux";
+import Web3 from "web3";
 import App from "./App";
 import "./index.css";
-import { Provider } from "react-redux";
 import store from "./redux/store";
-import { Web3ReactProvider } from "@web3-react/core";
-import Web3 from "web3";
-import "react-notifications-component/dist/theme.css";
 
 function getLibrary(provider) {
 	return new Web3(provider);

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ModalDialog from "../elements/ModalDialog";
 import Home from "../pages/home";
 
 const AppRoutes = () => {
@@ -8,6 +9,7 @@ const AppRoutes = () => {
 				<Route exact path="/" element={<Home />} />
 				<Route path="*" element={<Home />} />
 			</Routes>
+			<ModalDialog />
 		</Router>
 	);
 };

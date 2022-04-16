@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
-import postsReducer from "./postsReducer";
-import tokensReducer from "./tokensReducer";
-import userReducer from "./userReducer";
+import alertReducer from "./alertReducer";
+import dialogReducer from "./dialogReducer";
+import tokenReducer from "./tokenReducer";
 
 const rootReducer = combineReducers({
-	posts: postsReducer,
-	user: userReducer,
-	tokens: tokensReducer,
+	dialog: dialogReducer,
+	alert: alertReducer,
+	token: tokenReducer,
 });
 
 export default rootReducer;

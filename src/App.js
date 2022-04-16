@@ -1,17 +1,23 @@
-import AppRoutes from "./components/routes";
+import { useWeb3React } from "@web3-react/core";
+import { useEffect } from "react";
 import { ReactNotifications } from "react-notifications-component";
-import Loading from "./components/pages/loading";
-import { useSelector } from "react-redux";
-import { selectIsLoading } from "./redux/reducers/tokensReducer";
+import AppRoutes from "./components/routes";
+import { getProvider } from "./components/utils/StorageUtil";
+import { connectors } from "./wallet/connectors";
 
 const App = () => {
-	const isLoading = useSelector(selectIsLoading);
+	const { library, chainId, account, activate, deactivate, active } =
+		useWeb3React();
+
+	useEffect(() => {
+		const provider = getProvider();
+		if (provider) activate(connectors[provider]);
+	}, []);
 
 	return (
 		<div>
 			<ReactNotifications />
 			<AppRoutes />
-			{isLoading && <Loading />}
 		</div>
 	);
 };
