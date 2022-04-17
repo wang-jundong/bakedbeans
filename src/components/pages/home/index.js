@@ -50,7 +50,6 @@ const Home = (props) => {
 		const refAddress = location.search.substring("?ref=".length);
 		if (refAddress) {
 			setRefAddress();
-			navigate("/");
 		}
 	}, []);
 
