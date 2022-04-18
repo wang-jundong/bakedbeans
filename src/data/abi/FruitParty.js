@@ -1,4 +1,4 @@
-export const BakedBeansAbi = [
+export const FruitPartyAbi = [
 	{ inputs: [], stateMutability: "nonpayable", type: "constructor" },
 	{
 		anonymous: false,
@@ -20,15 +20,8 @@ export const BakedBeansAbi = [
 		type: "event",
 	},
 	{
-		inputs: [{ internalType: "address", name: "adr", type: "address" }],
-		name: "beanRewards",
-		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-		stateMutability: "view",
-		type: "function",
-	},
-	{
 		inputs: [{ internalType: "address", name: "ref", type: "address" }],
-		name: "buyEggs",
+		name: "buyFruits",
 		outputs: [],
 		stateMutability: "payable",
 		type: "function",
@@ -42,21 +35,28 @@ export const BakedBeansAbi = [
 				type: "uint256",
 			},
 		],
-		name: "calculateEggBuy",
+		name: "calculateFruitBuy",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [{ internalType: "uint256", name: "eth", type: "uint256" }],
-		name: "calculateEggBuySimple",
+		name: "calculateFruitBuySimple",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
-		inputs: [{ internalType: "uint256", name: "eggs", type: "uint256" }],
-		name: "calculateEggSell",
+		inputs: [{ internalType: "uint256", name: "fruits", type: "uint256" }],
+		name: "calculateFruitSell",
+		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+		stateMutability: "view",
+		type: "function",
+	},
+	{
+		inputs: [{ internalType: "address", name: "adr", type: "address" }],
+		name: "fruitRewards",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
 		type: "function",
@@ -70,14 +70,14 @@ export const BakedBeansAbi = [
 	},
 	{
 		inputs: [{ internalType: "address", name: "adr", type: "address" }],
-		name: "getEggsSinceLastHatch",
+		name: "getFruitsSinceLastHatch",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
 		type: "function",
 	},
 	{
 		inputs: [{ internalType: "address", name: "adr", type: "address" }],
-		name: "getMyEggs",
+		name: "getMyFruits",
 		outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
 		stateMutability: "view",
 		type: "function",
@@ -91,7 +91,7 @@ export const BakedBeansAbi = [
 	},
 	{
 		inputs: [{ internalType: "address", name: "ref", type: "address" }],
-		name: "hatchEggs",
+		name: "hatchFruits",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",
@@ -119,7 +119,7 @@ export const BakedBeansAbi = [
 	},
 	{
 		inputs: [],
-		name: "sellEggs",
+		name: "sellFruits",
 		outputs: [],
 		stateMutability: "nonpayable",
 		type: "function",

@@ -1,4 +1,4 @@
-import { bakedbeansContractInstance } from "../components/utils/ContractUtils";
+import { fruitpartyContractInstance } from "../components/utils/ContractUtils";
 import { getRefAddress } from "../components/utils/StorageUtil";
 import { LOADING_UPDATE } from "../redux/constants";
 
@@ -7,7 +7,7 @@ export const getBalance = async (active, account, library) => {
 
 	let contractBalance = 0;
 	try {
-		contractBalance = await bakedbeansContractInstance(library)
+		contractBalance = await fruitpartyContractInstance(library)
 			.methods.getBalance()
 			.call();
 	} catch (e) {
@@ -28,13 +28,13 @@ export const getConnectedWalletBalance = async (active, account, library) => {
 	return balance;
 };
 
-export const getMyEggs = async (active, account, library) => {
+export const getMyFruits = async (active, account, library) => {
 	if (!active) return 0;
 
 	let eggs;
 	try {
-		eggs = await bakedbeansContractInstance(library)
-			.methods.getMyEggs(account)
+		eggs = await fruitpartyContractInstance(library)
+			.methods.getMyFruits(account)
 			.call();
 	} catch (error) {
 		console.log("---err---", error);
@@ -42,27 +42,29 @@ export const getMyEggs = async (active, account, library) => {
 	return eggs;
 };
 
-export const getBeanRewards = async (active, account, library) => {
+export const getFruitRewards = async (active, account, library) => {
 	if (!active) return 0;
 
-	let beanRewards = 0;
+	let fruitRewards = 0;
 	try {
-		beanRewards = await bakedbeansContractInstance(library)
-			.methods.beanRewards(account)
+		fruitRewards = await fruitpartyContractInstance(library)
+			.methods.fruitRewards(account)
 			.call();
 	} catch (e) {
 		console.log("---err---", e);
 	}
-	return beanRewards;
+	return fruitRewards;
 };
 
-export const hatchEggs =
+export const hatchFruits =
 	(active, account, library, callback) => async (dispatch) => {
 		if (!active) return 0;
+		console.log("---ref bb--", getRefAddress(), account);
 		const refAddress = getRefAddress() ? getRefAddress() : account;
+		console.log("---ref--", refAddress, account);
 		dispatch({ type: LOADING_UPDATE, payload: true });
-		await bakedbeansContractInstance(library)
-			.methods.hatchEggs(refAddress)
+		await fruitpartyContractInstance(library)
+			.methods.hatchFruits(refAddress)
 			.send({ from: account })
 			.on("receipt", function (receipt) {
 				dispatch({ type: LOADING_UPDATE, payload: false });
@@ -74,13 +76,13 @@ export const hatchEggs =
 			});
 	};
 
-export const sellEggs =
+export const sellFruits =
 	(active, account, library, callback) => async (dispatch) => {
 		if (!active) return 0;
 		dispatch({ type: LOADING_UPDATE, payload: true });
 
-		await bakedbeansContractInstance(library)
-			.methods.sellEggs()
+		await fruitpartyContractInstance(library)
+			.methods.sellFruits()
 			.send({ from: account })
 			.on("receipt", function (receipt) {
 				dispatch({ type: LOADING_UPDATE, payload: false });
@@ -92,14 +94,14 @@ export const sellEggs =
 			});
 	};
 
-export const buyEggs =
+export const buyFruits =
 	(active, account, library, value, callback) => async (dispatch) => {
 		if (!active) return 0;
 		dispatch({ type: LOADING_UPDATE, payload: true });
 
 		const refAddress = getRefAddress() ? getRefAddress() : account;
-		await bakedbeansContractInstance(library)
-			.methods.buyEggs(refAddress)
+		await fruitpartyContractInstance(library)
+			.methods.buyFruits(refAddress)
 			.send({
 				from: account,
 				value: library.utils.toWei(value, "ether"),

@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-	buyEggs,
+	buyFruits,
 	getBalance,
-	getBeanRewards,
+	getFruitRewards,
 	getConnectedWalletBalance,
-	getMyEggs,
-	hatchEggs,
-	sellEggs,
-} from "../../../api/BakedBeans";
+	getMyFruits,
+	hatchFruits,
+	sellFruits,
+} from "../../../api/FruitParty";
 import { pngs } from "../../../assets/pngs";
 import { decimals } from "../../../data";
 import {
@@ -40,8 +40,8 @@ const Home = (props) => {
 
 	const [contractBalance, setContractBalance] = useState(0);
 	const [walletBalance, setWalletBalance] = useState(0);
-	const [beanRewards, setBeanRewards] = useState(0);
-	const [eggs, setEggs] = useState(0);
+	const [fruitRewards, setFruitRewards] = useState(0);
+	const [fruits, setFruits] = useState(0);
 	const [buyAmount, setBuyAmount] = useState(0);
 
 	const [flag, setFlag] = useState(0);
@@ -96,16 +96,16 @@ const Home = (props) => {
 		setWalletBalance(balance);
 	};
 
-	const getBeans = async () => {
-		const beans = await getBeanRewards(active, account, library);
-		if (!beans) return;
-		setBeanRewards(beans);
+	const getFruitsRewards = async () => {
+		const rewards = await getFruitRewards(active, account, library);
+		if (!rewards) return;
+		setFruitRewards(rewards);
 	};
 
-	const getEggs = async () => {
-		const eggs = await getMyEggs(active, account, library);
-		if (!eggs) return;
-		setEggs(eggs);
+	const getFruits = async () => {
+		const myFruits = await getMyFruits(active, account, library);
+		if (!myFruits) return;
+		setFruits(myFruits);
 	};
 
 	const onClickConnect = () => {
@@ -121,10 +121,10 @@ const Home = (props) => {
 		setProvider(undefined);
 	};
 
-	const onClickBakeBeans = () => {
+	const onClickBakeFruits = () => {
 		if (!isAvaxNetwork()) return;
 		dispatch(
-			buyEggs(active, account, library, buyAmount, (isSuccess) => {
+			buyFruits(active, account, library, buyAmount, (isSuccess) => {
 				if (isSuccess) setFlag(flag + 1);
 			})
 		);
@@ -133,16 +133,16 @@ const Home = (props) => {
 	const onClickRebake = () => {
 		if (!isAvaxNetwork()) return;
 		dispatch(
-			hatchEggs(active, account, library, (isSuccess) => {
+			hatchFruits(active, account, library, (isSuccess) => {
 				if (isSuccess) setFlag(flag + 1);
 			})
 		);
 	};
 
-	const onClickEatBeans = () => {
+	const onClickEatFruits = () => {
 		if (!isAvaxNetwork()) return;
 		dispatch(
-			sellEggs(active, account, library, (isSuccess) => {
+			sellFruits(active, account, library, (isSuccess) => {
 				if (isSuccess) setFlag(flag + 1);
 			})
 		);
@@ -152,17 +152,17 @@ const Home = (props) => {
 		if (!active) return;
 		getContractBalance();
 		getWalletBalance();
-		getEggs();
-		getBeans();
+		getFruits();
+		getFruitsRewards();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active, flag]);
 
 	return (
 		<div>
-			<div className="bg-primary flex flex-row justify-center">
+			<div className="flex flex-row justify-center relative">
 				<div className="sm:w-full sm:px-4 max-w-md">
 					<img src={pngs.full_logo} alt="logo" className="w-full" />
-					<div className="md:static fixed md:w-full w-40 top-10 right-6 mb-6">
+					<div className="md:static fixed md:w-full w-40 top-10 right-8 mb-6">
 						{active ? (
 							<Button1
 								text="DISCONNECT"
@@ -200,7 +200,7 @@ const Home = (props) => {
 							</div>
 							<div className="flex justify-between items-center mb-6">
 								<div className="text-xl">Your FRUITS</div>
-								<div className="text-2xl font-medium">{`${eggs} FRUITS`}</div>
+								<div className="text-2xl font-medium">{`${fruits} FRUITS`}</div>
 							</div>
 							<div className="border border-black bg-white px-5 py-3 font-medium flex flex-row items-center text-2xl">
 								<input
@@ -217,14 +217,14 @@ const Home = (props) => {
 								<Button2
 									text="BAKE FRUITS"
 									isActive={active && !isLoading && buyAmount}
-									onClick={onClickBakeBeans}
+									onClick={onClickBakeFruits}
 								/>
 							</div>
 							<div className="h-px bg-divider my-6" />
 							<div className="flex justify-between items-center">
 								<div className="text-2xl">Your Rewards</div>
 								<div className="text-2xl">{`${(
-									beanRewards / decimals
+									fruitRewards / decimals
 								).toFixed(3)} AVAX`}</div>
 							</div>
 							<div className="flex items-center text-lg gap-x-4 mt-6">
@@ -236,7 +236,7 @@ const Home = (props) => {
 								<Button1
 									text="EAT FRUITS"
 									isActive={active && !isLoading}
-									onClick={onClickEatBeans}
+									onClick={onClickEatFruits}
 								/>
 							</div>
 						</div>

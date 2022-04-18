@@ -5,7 +5,7 @@ const Button1 = (props) => {
 		<>
 			{isActive ? (
 				<div
-					className="hover:bg-dark-yellow bg-yellow hover:shadow-2xl shadow-3xl rounded-md py-3 flex-1 text-center cursor-pointer"
+					className="hover:bg-dark-primary bg-primary hover:shadow-2xl shadow-3xl rounded-md py-3 flex-1 text-center cursor-pointer"
 					onClick={onClick}
 				>
 					{text}

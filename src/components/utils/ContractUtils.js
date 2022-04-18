@@ -1,10 +1,10 @@
-import { BakedBeansAddress } from "../../data";
-import { BakedBeansAbi } from "../../data/abi/BakedBeans";
+import { FruitPartyAddress } from "../../data";
+import { FruitPartyAbi } from "../../data/abi/FruitParty";
 
-export const bakedbeansContractInstance = (library) => {
-	const bakedbeans = new library.eth.Contract(
-		BakedBeansAbi,
-		BakedBeansAddress
+export const fruitpartyContractInstance = (library) => {
+	const fruitparty = new library.eth.Contract(
+		FruitPartyAbi,
+		FruitPartyAddress
 	);
-	return bakedbeans;
+	return fruitparty;
 };

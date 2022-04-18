@@ -1,2 +1,2 @@
-export const BakedBeansAddress = "0xf8626c9fcaacf50d618252907221a26e633e9d27";
+export const FruitPartyAddress = "0xb7DF4A9a2baa72a70a9d50C062200C321c6f20EC";
 export const decimals = 10 ** 18;
